@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[letterpaper, margin=1.5in]{geometry}
+
+\usepackage[sc]{mathpazo}
+\linespread{1.25} 
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\begin{center}
+\textbf{Corbett Carrel Quasi Assignment Econ 4660}
+\end{center}
+
+<<echo = false>>=
+setwd("~/OneDrive - University of Utah/Fall 2018/Econ 4660/Data")
+bhouse <- read.csv("bhouse_assign2.csv", header=T)
+@
+
+\section*{}
+\textbf{With medv as the dependent variable, select any six of the remaining variables to use as explanatory variables.}
+
+For my 6 variables I picked CRIM, ZN, INDUS, CHAS, NOX, RM. 
+
+\section*{}
+\textbf{Before doing any regression analysis, briefly describe your anticipated signs for the coefficients on the variables you selected.}
+\begin{itemize}
+  \item I would expect the sign for CRIM variable to be negative because as the crime rate increases the median home value should decrease. 
+  \item I would expect the sign for ZN variable to be positive because as the amount of land residentially zoned for lots over 25,000 sq.ft increases the median home value should also increase. 
+  \item I would expect the sign for INDUS variable to be negative because as the proportion of non-retail business acres increases the median home value should decease. 
+  \item I would expect the sign for CHAS variable to be positive because if a home is next to the Charles River the median home value should increase.
+  \item I would expect the sign for NOX variable to be negative because as the nitric oxides concentration increases median home value should decrease.
+  \item I would expect the sign for RM variable to be positive because as the average number of rooms per dwelling increases the median home value should increase.
+\end{itemize}
+
+\section*{}
+\textbf{Why are there $2^6$ possible regression models in this problem (conventionally)?}
+There are $2^6$ possible regression models because the 2 represents the fact each variable can be either in or out of the regression model. The 6th power represents the 6 variable that we chose for our regressions model. So it is $2^6$ because there are two options for each variable either in or out of the regression and there are 6 possible variables. 
+
+\section*{}
+\textbf{Using the variables you selected, do OLS estimation on the full model (with all six) explanatory variables.}
+
+\subsection*{6 Variable Model}
+MEDV = -17.95 - 0.17CRIM - 0.14INDUS - 7.18NOX + 4.78CHAS + 7.34RM + 0.02ZN
+<<echo = false>>=
+model6 <-lm(medv ~ chas + crim + indus + nox + rm + zn , data = bhouse)
+summary(model6)
+@
+
+\section*{}
+\textbf{Using the variables you selected, do the six simple OLS models using just one of the explanatory variables you selected.}
+
+\subsection*{CHAS Model}
+MEDV = 22.09 + 6.35CHAS
+<<echo = false>>=
+modelchas <-lm(medv ~ chas , data = bhouse)
+summary(modelchas)
+@
+
+\subsection*{CRIM Model}
+MEDV = 24.03 - 0.42CRIM
+<<echo = false>>=
+modelcrim <-lm(medv ~ crim , data = bhouse)
+summary(modelcrim)
+@
+
+\subsection*{INDUS Model}
+MEDV = 29.75 - 0.65INDUS
+<<echo = false>>=
+modelindus <-lm(medv ~ indus , data = bhouse)
+summary(modelindus)
+@
+
+\subsection*{NOX Model}
+MEDV = 41.35 - 33.92NOX
+<<echo = false>>=
+modelnox <-lm(medv ~ nox , data = bhouse)
+summary(modelnox)
+@
+
+\subsection*{RM Model}
+MEDV = -34.67 +  9.102RM
+<<echo = false>>=
+modelrm <-lm(medv ~ rm , data = bhouse)
+summary(modelrm)
+@
+
+\subsection*{ZN Model}
+MEDV = 20.92 + 0.14ZN
+<<echo = false>>=
+modelzn <-lm(medv ~ zn , data = bhouse)
+summary(modelzn)
+@
+
+\section*{}
+\textbf{Compare the OLS “full” model with the six OLS “simple” models. Are your results consistent in term of estimated signs? Do your results conform with your prior beliefs?}
+
+After running all of the regression models for my 6 chosen variables my 
+
+\end{document}
